@@ -4,23 +4,12 @@ var http = require("http");
 var url = require("url");
 
 var app = express();
+var server = http.createServer(app);
 
 function buildTimeStamp(pathname) 
 {
-    var months = {
-        0: "January",
-        1: "February",
-        2: "March",
-        3: "April",
-        4: "May",
-        5: "June",
-        6: "July",
-        7: "August",
-        8: "September",
-        9: "October",
-        10: "November",
-        11: "December"
-    };
+    var months = {  0: "January", 1: "February", 2: "March", 3: "April", 4: "May", 5: "June", 6: "July",
+                    7: "August", 8: "September", 9: "October", 10: "November", 11: "December"};
     var unixTime = 0;
     var naturalTime = "";
 
@@ -36,7 +25,6 @@ function buildTimeStamp(pathname)
         unixTime = Date.parse(pathname) / 1000;
         naturalTime = pathname;
     }
-    
     return {unix: unixTime, natural: naturalTime};
 }
 
@@ -50,7 +38,7 @@ app.get("/:query", function(req, res) {
     res.send(object);
 });
 
-app.listen(process.env.PORT), function() {
-    console.log("App listening at 0.0.0.0:8080");
-};
-
+server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
+  var addr = server.address();
+  console.log("Chat server listening at", addr.address + ":" + addr.port);
+});
