@@ -9,7 +9,7 @@ var server = http.createServer(app);
 function buildTimeStamp(pathname) 
 {
     var months = {  0: "January", 1: "February", 2: "March", 3: "April", 4: "May", 5: "June", 6: "July",
-                    7: "August", 8: "September", 9: "October", 10: "November", 11: "December"};
+                        7: "August", 8: "September", 9: "October", 10: "November", 11: "December"}
     var unixTime = 0;
     var naturalTime = "";
 
@@ -40,5 +40,5 @@ app.get("/:query", function(req, res) {
 
 server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
   var addr = server.address();
-  console.log("Chat server listening at", addr.address + ":" + addr.port);
+  console.log("App listening at", addr.address + ":" + addr.port);
 });
